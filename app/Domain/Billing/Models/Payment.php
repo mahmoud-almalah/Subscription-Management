@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Billing\Models;
 
 use App\Domain\Billing\Enums\PaymentMethodEnum;
@@ -25,7 +27,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon $payment_date
  * @property string|null $reference_number
  * @property string|null $notes
- *
  * @property-read Tenant $tenant
  * @property-read Invoice $invoice
  * @property-read Customer $customer
@@ -33,11 +34,20 @@ use Illuminate\Support\Carbon;
 #[Table(name: 'payments', keyType: 'string', incrementing: false)]
 #[Fillable([
     'tenant_id', 'invoice_id', 'customer_id', 'amount', 'currency',
-    'payment_method', 'payment_date', 'reference_number', 'notes'
+    'payment_method', 'payment_date', 'reference_number', 'notes',
 ])]
-class Payment extends Model
+final class Payment extends Model
 {
     use HasFactory, HasUlids;
+
+    /* @return array<string, string> */
+    protected function casts(): array
+    {
+        return [
+            'payment_date' => 'date',
+            'payment_method' => PaymentMethodEnum::class,
+        ];
+    }
 
     /* @return BelongsTo<Tenant, $this> */
     public function tenant(): BelongsTo
@@ -55,15 +65,6 @@ class Payment extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(related: Customer::class, foreignKey: 'customer_id', ownerKey: 'id');
-    }
-
-    /* @return array<string, string> */
-    protected function casts(): array
-    {
-        return [
-            'payment_date' => 'date',
-            'payment_method' => PaymentMethodEnum::class,
-        ];
     }
 
     protected static function newFactory(): PaymentFactory

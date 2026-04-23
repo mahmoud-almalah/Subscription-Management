@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Domain\Billing\Enums\PaymentMethodEnum;
@@ -10,7 +12,7 @@ use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /** @extends Factory<Payment> */
-class PaymentFactory extends Factory
+final class PaymentFactory extends Factory
 {
     protected $model = Payment::class;
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Domain\Billing\Enums\InvoiceStatusEnum;
@@ -10,7 +12,7 @@ use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /** @extends Factory<Invoice> */
-class InvoiceFactory extends Factory
+final class InvoiceFactory extends Factory
 {
     protected $model = Invoice::class;
 
@@ -35,7 +37,7 @@ class InvoiceFactory extends Factory
 
     public function paid(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'status' => InvoiceStatusEnum::PAID,
             'paid_at' => now(),
         ]);
@@ -43,7 +45,7 @@ class InvoiceFactory extends Factory
 
     public function pending(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'status' => InvoiceStatusEnum::DRAFT,
             'paid_at' => null,
         ]);
@@ -51,7 +53,7 @@ class InvoiceFactory extends Factory
 
     public function overdue(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'status' => InvoiceStatusEnum::OVERDUE,
             'due_date' => now()->subDays(5),
             'paid_at' => null,
@@ -60,7 +62,7 @@ class InvoiceFactory extends Factory
 
     public function cancelled(): static
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'status' => InvoiceStatusEnum::CANCELLED,
             'paid_at' => null,
         ]);

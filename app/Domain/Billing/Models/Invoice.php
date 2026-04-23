@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Billing\Models;
 
 use App\Domain\Billing\Enums\InvoiceStatusEnum;
@@ -11,7 +13,6 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,7 +34,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $paid_at
  * @property Carbon|null $revenue_recognized_at
  * @property string|null $notes
- *
  * @property-read Tenant $tenant
  * @property-read Subscription $subscription
  * @property-read Customer $customer
@@ -43,11 +43,24 @@ use Illuminate\Support\Carbon;
 #[Fillable([
     'tenant_id', 'subscription_id', 'customer_id', 'invoice_number', 'amount',
     'currency', 'status', 'period_start', 'period_end', 'due_date', 'paid_at',
-    'revenue_recognized_at', 'notes'
+    'revenue_recognized_at', 'notes',
 ])]
-class Invoice extends Model
+final class Invoice extends Model
 {
     use HasFactory, HasUlids;
+
+    /* @return array<string, string> */
+    protected function casts(): array
+    {
+        return [
+            'period_start' => 'date',
+            'period_end' => 'date',
+            'due_date' => 'date',
+            'paid_at' => 'timestamp',
+            'revenue_recognized_at' => 'timestamp',
+            'status' => InvoiceStatusEnum::class,
+        ];
+    }
 
     /* @return BelongsTo<Tenant, $this> */
     public function tenant(): BelongsTo
@@ -71,19 +84,6 @@ class Invoice extends Model
     public function payments(): HasMany
     {
         return $this->hasMany(related: Payment::class, foreignKey: 'invoice_id', localKey: 'id');
-    }
-
-    /* @return array<string, string> */
-    protected function casts(): array
-    {
-        return [
-            'period_start' => 'date',
-            'period_end' => 'date',
-            'due_date' => 'date',
-            'paid_at' => 'timestamp',
-            'revenue_recognized_at' => 'timestamp',
-            'status' => InvoiceStatusEnum::class,
-        ];
     }
 
     protected static function newFactory(): InvoiceFactory
