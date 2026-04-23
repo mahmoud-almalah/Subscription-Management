@@ -49,6 +49,11 @@ final class Payment extends Model
         ];
     }
 
+    public function getFormattedAmount(): string
+    {
+        return number_format($this->amount, 2);
+    }
+
     /* @return BelongsTo<Tenant, $this> */
     public function tenant(): BelongsTo
     {

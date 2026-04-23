@@ -63,6 +63,24 @@ final class Subscription extends Model
             && ($this->ends_at === null || $this->ends_at->isFuture());
     }
 
+    public function cancel(string $reason = null): void
+    {
+        $this->update([
+            'status' => SubscriptionStatusEnum::CANCELLED,
+            'cancelled_at' => now(),
+            'cancellation_reason' => $reason,
+        ]);
+    }
+
+    public function getNextBillingDate(): ?Carbon
+    {
+        if ($this->status->isCancelled() || $this->next_billing_date === null) {
+            return null;
+        }
+
+        return $this->next_billing_date;
+    }
+
     /* @return BelongsTo<Tenant, $this> */
     public function tenant(): BelongsTo
     {

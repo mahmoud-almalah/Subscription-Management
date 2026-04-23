@@ -6,6 +6,7 @@ namespace App\Domain\Tenant\Models;
 
 use App\Domain\Billing\Models\Invoice;
 use App\Domain\Billing\Models\Payment;
+use App\Domain\Subscription\Enums\SubscriptionStatusEnum;
 use App\Domain\Subscription\Models\Subscription;
 use App\Domain\Tenant\Casts\LocationCast;
 use App\Domain\Tenant\Collections\CustomerMetadataCollection;
@@ -66,6 +67,13 @@ final class Customer extends Model
             ->latest();
     }
 
+    public function getActiveSubscription(): ?Subscription
+    {
+        return $this->subscriptions()
+            ->active('status', SubscriptionStatusEnum::ACTIVE)
+            ->first();
+    }
+
     /* @return HasMany<Payment, $this> */
     public function payments(): HasMany
     {
@@ -78,6 +86,13 @@ final class Customer extends Model
     {
         return $this->hasMany(related: Invoice::class, foreignKey: 'customer_id', localKey: 'id')
             ->latest();
+    }
+
+    public function getTotalRevenue(): float
+    {
+        return $this->payments()
+            ->where('amount', '>', 0)
+            ->sum('amount');
     }
 
     protected static function newFactory(): CustomerFactory

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Accounting\Models;
 
 use App\Domain\Accounting\Enums\JournalEntryTypeEnum;
+use App\Domain\Accounting\Enums\NormalBalanceEnum;
 use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
@@ -55,5 +56,19 @@ final class JournalEntry extends Model
     public function reference(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function isBalanced(): bool
+    {
+        $totalDebits = $this->lines()->where('type', NormalBalanceEnum::DEBIT)->sum('amount');
+        $totalCredits = $this->lines()->where('type', NormalBalanceEnum::CREDIT)->sum('amount');
+        return abs($totalDebits - $totalCredits) < 0.01;
+    }
+
+    public function getTotalDebits(): float
+    {
+        return $this->lines()
+            ->where('type', NormalBalanceEnum::DEBIT)
+            ->sum('amount');
     }
 }

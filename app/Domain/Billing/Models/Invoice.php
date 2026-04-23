@@ -62,6 +62,24 @@ final class Invoice extends Model
         ];
     }
 
+    public function isPaid(): bool
+    {
+        return $this->status->isPaid() && $this->paid_at !== null;
+    }
+
+    public function isOverdue(): bool
+    {
+        return $this->status->isOverdue() && $this->due_date->isPast() && ! $this->isPaid();
+    }
+
+    public function markAsPaid(): void
+    {
+        $this->update([
+            'status' => InvoiceStatusEnum::PAID,
+            'paid_at' => now(),
+        ]);
+    }
+
     /* @return BelongsTo<Tenant, $this> */
     public function tenant(): BelongsTo
     {

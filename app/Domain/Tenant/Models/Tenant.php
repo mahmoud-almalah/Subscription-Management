@@ -14,7 +14,9 @@ use App\Domain\Tenant\Data\TenantSettingData;
 use App\Domain\Tenant\Enums\TenantStatusEnum;
 use Database\Factories\TenantFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -96,5 +98,16 @@ final class Tenant extends Model
     protected static function newFactory(): TenantFactory
     {
         return TenantFactory::new();
+    }
+
+    /**
+     * @param Builder<Tenant> $query
+     *
+     * @return Builder<Tenant>
+     */
+    #[Scope]
+    protected function active(Builder $query): Builder
+    {
+        return $query->where('status', TenantStatusEnum::ACTIVE);
     }
 }

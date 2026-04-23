@@ -48,4 +48,9 @@ final class User extends Authenticatable
     {
         return UserFactory::new();
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
 }

@@ -48,6 +48,14 @@ final class Plan extends Model
         return $this->belongsTo(related: Tenant::class, foreignKey: 'tenant_id', ownerKey: 'id');
     }
 
+    public function getMonthlyPrice(): float
+    {
+        return match ($this->billing_cycle) {
+            'yearly' => $this->price / 12,
+            default => $this->price,
+        };
+    }
+
     protected static function newFactory(): PlanFactory
     {
         return PlanFactory::new();
