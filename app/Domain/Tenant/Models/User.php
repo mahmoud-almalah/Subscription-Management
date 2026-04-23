@@ -36,7 +36,6 @@ final class User extends Authenticatable
         return $this->belongsTo(related: Tenant::class, foreignKey: 'tenant_id', ownerKey: 'id');
     }
 
-    /
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();
