@@ -40,11 +40,12 @@
 Laravel provides `Str`, `Arr`, `Number`, and `Uri` helper classes that are more readable, chainable, and UTF-8 safe than raw PHP functions. Always prefer them.
 
 Strings — use `Str` and fluent `Str::of()` over raw PHP:
+
 ```php
 // Incorrect
 $slug = strtolower(str_replace(' ', '-', $title));
 $short = substr($text, 0, 100) . '...';
-$class = substr(strrchr('App\Models\User', '\'), 1);
+$class = substr(strrchr('App\Domain\Tenant\Models\User', '\'), 1);
 
 // Correct
 $slug = Str::slug($title);
