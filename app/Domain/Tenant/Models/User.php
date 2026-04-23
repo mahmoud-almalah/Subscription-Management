@@ -28,9 +28,17 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password'])]
 final class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUlids;
+    use HasFactory, HasUlids, Notifiable;
 
-     /** @return BelongsTo<Tenant, $this> */
+    /** @return array<string, string> */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
+
+    /** @return BelongsTo<Tenant, $this> */
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(related: Tenant::class, foreignKey: 'tenant_id', ownerKey: 'id');
@@ -39,13 +47,5 @@ final class User extends Authenticatable
     protected static function newFactory(): UserFactory
     {
         return UserFactory::new();
-    }
-
-    /** @return array<string, string> */
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-        ];
     }
 }
