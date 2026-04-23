@@ -24,10 +24,10 @@ final class SubscriptionFactory extends Factory
             'plan_id' => Plan::factory(),
             'status' => $this->faker->randomElement(SubscriptionStatusEnum::class),
             'started_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
-            'ends_at' => $this->faker->boolean() ? $this->faker->dateTimeBetween('now', '+1 month') : null,
-            'next_billing_date' => $this->faker->boolean() ? $this->faker->dateTimeBetween('now', '+1 month') : null,
-            'cancelled_at' => $this->faker->boolean() ? $this->faker->dateTimeBetween('-1 month', 'now') : null,
-            'cancellation_reason' => $this->faker->boolean() ? $this->faker->sentence() : null,
+            'ends_at' => $this->faker->optional()->dateTimeBetween('now', '+1 month'),
+            'next_billing_date' => $this->faker->optional()->dateTimeBetween('now', '+1 month'),
+            'cancelled_at' => $this->faker->optional()->dateTimeBetween('-1 month', 'now'),
+            'cancellation_reason' => $this->faker->optional()->sentence(),
         ];
     }
 

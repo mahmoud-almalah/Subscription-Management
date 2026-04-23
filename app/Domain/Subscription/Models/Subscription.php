@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Subscription\Models;
 
+use App\Domain\Billing\Models\Invoice;
 use App\Domain\Subscription\Enums\SubscriptionStatusEnum;
 use App\Domain\Tenant\Models\Customer;
 use App\Domain\Tenant\Models\Tenant;
 use Database\Factories\SubscriptionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -30,6 +33,7 @@ use Illuminate\Support\Carbon;
  * @property-read Tenant $tenant
  * @property-read Customer $customer
  * @property-read Plan $plan
+ * @property-read Collection<int, Invoice> $invoices
  */
 #[Table(name: 'subscriptions', keyType: 'string', incrementing: false)]
 #[Fillable([
@@ -75,6 +79,13 @@ final class Subscription extends Model
     public function plan(): BelongsTo
     {
         return $this->belongsTo(related: Plan::class, foreignKey: 'plan_id', ownerKey: 'id');
+    }
+
+    /* @return HasMany<Invoice, $this> */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'subscription_id', 'id')
+            ->latest();
     }
 
     protected static function newFactory(): SubscriptionFactory

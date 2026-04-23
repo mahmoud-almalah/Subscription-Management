@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Tenant\Models;
 
+use App\Domain\Billing\Models\Invoice;
+use App\Domain\Billing\Models\Payment;
 use App\Domain\Subscription\Models\Plan;
 use App\Domain\Subscription\Models\Subscription;
 use App\Domain\Tenant\Casts\TenantSettingCast;
@@ -29,6 +31,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Collection<int, User> $users
  * @property-read Collection<int, Plan> $plans
  * @property-read Collection<int, Subscription> $subscriptions
+ * @property-read Collection<int, Payment> $payments
+ * @property-read Collection<int, Invoice> $invoices
  */
 #[Table(name: 'tenants', keyType: 'string', incrementing: false)]
 #[Fillable(['name', 'slug', 'email', 'status', 'settings'])]
@@ -67,6 +71,18 @@ final class Tenant extends Model
     public function subscriptions(): HasMany
     {
         return $this->hasMany(related: Subscription::class, foreignKey: 'tenant_id', localKey: 'id');
+    }
+
+    /* @return HasMany<Payment, $this> */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(related: Payment::class, foreignKey: 'tenant_id', localKey: 'id');
+    }
+
+    /* @return HasMany<Invoice, $this> */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(related: Invoice::class, foreignKey: 'tenant_id', localKey: 'id');
     }
 
     protected static function newFactory(): TenantFactory

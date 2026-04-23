@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Tenant\Models;
 
+use App\Domain\Billing\Models\Invoice;
+use App\Domain\Billing\Models\Payment;
 use App\Domain\Subscription\Models\Subscription;
 use App\Domain\Tenant\Casts\LocationCast;
 use App\Domain\Tenant\Collections\CustomerMetadataCollection;
@@ -32,6 +34,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property CustomerMetadataCollection<int, CustomerMetadataData> $metadata
  * @property-read Tenant $tenant
  * @property-read Collection<int, Subscription> $subscriptions
+ * @property-read Collection<int, Payment> $payments
+ * @property-read Collection<int, Invoice> $invoices
  */
 #[Table(name: 'customers', keyType: 'string', incrementing: false)]
 #[Fillable(['tenant_id', 'name', 'email', 'phone', 'address', 'status', 'metadata'])]
@@ -59,6 +63,20 @@ final class Customer extends Model
     public function subscriptions(): HasMany
     {
         return $this->hasMany(related: Subscription::class, foreignKey: 'customer_id', localKey: 'id')
+            ->latest();
+    }
+
+    /* @return HasMany<Payment, $this> */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(related: Payment::class, foreignKey: 'customer_id', localKey: 'id')
+            ->latest();
+    }
+
+    /* @return HasMany<Invoice, $this> */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(related: Invoice::class, foreignKey: 'customer_id', localKey: 'id')
             ->latest();
     }
 
