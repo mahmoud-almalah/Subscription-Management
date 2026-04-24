@@ -23,17 +23,6 @@ enum AccountTypeEnum: string
         };
     }
 
-    public function getCOAPrefix(): int
-    {
-        return match ($this) {
-            self::ASSET => 1000,
-            self::LIABILITY => 2000,
-            self::EQUITY => 3000,
-            self::REVENUE => 4000,
-            self::EXPENSE => 5000,
-        };
-    }
-
     public function getNormalBalance(): NormalBalanceEnum
     {
         return match ($this) {
