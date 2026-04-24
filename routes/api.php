@@ -33,7 +33,20 @@ Route::middleware([
     Route::apiResource('plans', PlanController::class);
     Route::apiResource('customers', CustomerController::class);
     Route::apiResource('subscriptions', SubscriptionController::class);
-    Route::apiResource('invoices', InvoiceController::class);
-    Route::apiResource('payments', PaymentController::class);
-    Route::apiResource('accounts', AccountingController::class);
+    Route::apiResource('invoices', InvoiceController::class)
+        ->only(['index', 'show']);
+    Route::apiResource('payments', PaymentController::class)
+        ->only(['index', 'show', 'store']);
+
+    Route::get('invoices/generate-monthly', [InvoiceController::class, 'generateMonthlyInvoices'])
+        ->name('invoices.generate-monthly');
+
+    Route::group([
+        'prefix' => 'accounting',
+        'as' => 'accounting.',
+        'controller' => AccountingController::class,
+    ], function () {
+        Route::get('journal', 'journal')->name('journal');
+        Route::get('recognize-revenue', 'recognizeRevenue')->name('recognize-revenue');
+    });
 });
