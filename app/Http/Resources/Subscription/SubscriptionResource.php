@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Resources\Subscription;
 
 use App\Domain\Subscription\Models\Subscription;
+use App\Http\Resources\Customer\CustomerResource;
 use App\Http\Resources\Plan\PlanResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -21,6 +22,9 @@ final class SubscriptionResource extends JsonResource
                 'id' => $this->resource->status->value,
                 'name' => $this->resource->status->getLabel(),
             ],
+            'customer' => $this->whenLoaded('customer', CustomerResource::make($this->resource->customer)),
+            'invoices_count' => $this->whenCounted('invoices'),
+            'invoices' => $this->whenLoaded('invoices', InvoiceResource::collection($this->resource->invoices)),
             'is_active' => $this->resource->isActive(),
             'started_at' => $this->resource->started_at->toDateString(),
             'ends_at' => $this->resource->ends_at?->toDateString(),
