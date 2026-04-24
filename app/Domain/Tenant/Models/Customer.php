@@ -24,13 +24,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $id
  * @property string $tenant_id
  * @property string $name
  * @property string $email
- * @property string $phone
+ * @property string|null $phone
  * @property LocationData $address
  * @property CustomerStatusEnum $status
  * @property CustomerMetadataCollection<int, CustomerMetadataData> $metadata
@@ -40,10 +41,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Collection<int, Invoice> $invoices
  */
 #[Table(name: 'customers', keyType: 'string', incrementing: false)]
-#[Fillable(['tenant_id', 'name', 'email', 'phone', 'address', 'status', 'metadata'])]
+#[Fillable(['tenant_id', 'name', 'email', 'phone', 'address', 'status', 'metadata', 'deleted_at'])]
 final class Customer extends Model
 {
-    use HasFactory, HasTenant, HasUlids;
+    use HasFactory, HasTenant, HasUlids, SoftDeletes;
 
     /** @return array<string, string> */
     protected function casts(): array

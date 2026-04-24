@@ -17,7 +17,8 @@ final class TenantScope implements Scope
         }
 
         $builder->where(
-            column: $model->qualifyColumn('tenant_id'),
+            column: 'tenant_id',
+            operator: '=',
             value: auth('user')->user()->tenant_id,
         );
     }

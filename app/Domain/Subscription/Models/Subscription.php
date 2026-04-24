@@ -103,7 +103,7 @@ final class Subscription extends Model
     /* @return HasMany<Invoice, $this> */
     public function invoices(): HasMany
     {
-        return $this->hasMany(Invoice::class, 'subscription_id', 'id')
+        return $this->hasMany(related: Invoice::class, foreignKey: 'subscription_id', localKey: 'id')
             ->latest();
     }
 

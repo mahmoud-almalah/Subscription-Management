@@ -14,7 +14,7 @@ trait HasTenant
         static::addGlobalScope(new TenantScope);
 
         static::creating(function (self $model): void {
-            if (auth('user')->check() && filled($model->tenant_id)) {
+            if (auth('user')->check() && blank($model->tenant_id)) {
                 $model->tenant_id = auth('user')->user()->tenant_id;
             }
         });

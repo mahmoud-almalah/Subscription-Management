@@ -8,6 +8,7 @@ use App\Domain\Accounting\Enums\AccountTypeEnum;
 use App\Domain\Accounting\Enums\NormalBalanceEnum;
 use App\Domain\Accounting\Models\Account;
 use App\Domain\Tenant\Models\Tenant;
+use Illuminate\Support\Str;
 
 final class CreateDefaultChartOfAccountsAction
 {
@@ -29,14 +30,14 @@ final class CreateDefaultChartOfAccountsAction
         [
             'code' => '2001',
             'name' => 'Deferred Revenue',
-            'type' => AccountTypeEnum::LIABILITY,
+            'type' => AccountTypeEnum::LIABILITY->value,
             'normal_balance' => NormalBalanceEnum::CREDIT->value,
             'is_system' => true,
         ],
         [
             'code' => '4001',
             'name' => 'Subscription Revenue',
-            'type' => AccountTypeEnum::REVENUE,
+            'type' => AccountTypeEnum::REVENUE->value,
             'normal_balance' => NormalBalanceEnum::CREDIT->value,
             'is_system' => true,
         ],
@@ -46,6 +47,7 @@ final class CreateDefaultChartOfAccountsAction
     {
         $accounts = array_map(
             static fn (array $account): array => [
+                'id' => (string) Str::ulid(),
                 ...$account,
                 'tenant_id' => $tenant->id,
                 'type' => data_get($account, 'type'),
