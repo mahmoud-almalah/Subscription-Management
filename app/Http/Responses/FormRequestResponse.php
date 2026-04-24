@@ -6,27 +6,26 @@ namespace App\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 final readonly class FormRequestResponse implements Responsable
 {
     public function __construct(
-        private mixed $data,
-        private string $message = 'Validation failed.',
+        private ?string $message,
+        /** @var array<string, array<int, string>> $data */
+        private array $data
     ) {}
 
     public function toResponse($request): JsonResponse
     {
-        return new JsonResponse(
+        return Response::json(
             data: [
                 'success' => false,
-                'message' => $this->message,
-                'data' => [
-                    'errors' => $this->data,
-                ],
-                'meta' => null,
+                'message' => $this->message ?? 'Validation failed',
+                'errors' => $this->data,
             ],
-            status: Response::HTTP_UNPROCESSABLE_ENTITY
+            status: SymfonyResponse::HTTP_UNPROCESSABLE_ENTITY
         );
     }
 }
