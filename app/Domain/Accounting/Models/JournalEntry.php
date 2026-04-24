@@ -10,6 +10,7 @@ use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,6 +28,8 @@ use Illuminate\Support\Carbon;
  * @property string $description
  * @property Carbon $entry_date
  * @property-read Tenant $tenant
+ * @property-read Collection<int, JournalLine> $lines
+ * @property-read Model $reference
  */
 #[Table(name: 'journal_entries', keyType: 'string', incrementing: false)]
 #[Fillable(['tenant_id', 'entry_number', 'type', 'reference_id', 'reference_type', 'description', 'entry_date'])]

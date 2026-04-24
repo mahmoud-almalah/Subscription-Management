@@ -33,7 +33,7 @@ return [
     |
     */
 
-    NunoMaduro\Essentials\Configurables\AutomaticallyEagerLoadRelationships::class => true,
+    NunoMaduro\Essentials\Configurables\AutomaticallyEagerLoadRelationships::class => false,
 
     /*
     |--------------------------------------------------------------------------

@@ -6,6 +6,7 @@ namespace App\Http\Resources\Subscription;
 
 use App\Domain\Subscription\Models\Subscription;
 use App\Http\Resources\Customer\CustomerResource;
+use App\Http\Resources\Invoice\InvoiceResource;
 use App\Http\Resources\Plan\PlanResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

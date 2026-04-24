@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Api\Subscription;
 
 use App\Domain\Subscription\Models\Plan;
@@ -7,7 +9,7 @@ use App\Domain\Tenant\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateSubscriptionRequest extends FormRequest
+final class CreateSubscriptionRequest extends FormRequest
 {
     public function rules(): array
     {

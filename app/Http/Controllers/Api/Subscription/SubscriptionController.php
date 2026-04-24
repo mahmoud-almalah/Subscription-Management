@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\Subscription;
 
 use App\Domain\Subscription\Models\Plan;
@@ -18,10 +20,10 @@ use Knuckles\Scribe\Attributes\Group;
 
 #[Group('Subscriptions')]
 #[Authenticated]
-class SubscriptionController
+final class SubscriptionController
 {
     public function __construct(
-        protected SubscriptionService $subscriptionService,
+        private SubscriptionService $subscriptionService,
     ) {}
 
     #[Endpoint(
