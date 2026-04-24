@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Billing\Models;
 
 use App\Domain\Billing\Enums\PaymentMethodEnum;
+use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Tenant\Models\Customer;
 use App\Domain\Tenant\Models\Tenant;
 use Database\Factories\PaymentFactory;
@@ -38,7 +39,7 @@ use Illuminate\Support\Carbon;
 ])]
 final class Payment extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasTenant, HasUlids;
 
     /* @return array<string, string> */
     protected function casts(): array

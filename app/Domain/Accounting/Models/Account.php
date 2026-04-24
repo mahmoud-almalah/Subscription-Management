@@ -6,6 +6,7 @@ namespace App\Domain\Accounting\Models;
 
 use App\Domain\Accounting\Enums\AccountTypeEnum;
 use App\Domain\Accounting\Enums\NormalBalanceEnum;
+use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -32,7 +33,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['tenant_id', 'code', 'type', 'name', 'normal_balance', 'is_system'])]
 final class Account extends Model
 {
-    use HasUlids;
+    use HasTenant, HasUlids;
 
     protected function casts(): array
     {
@@ -72,8 +73,7 @@ final class Account extends Model
     }
 
     /**
-     * @param Builder<$this> $query
-     *
+     * @param  Builder<$this>  $query
      * @return Builder<$this>
      */
     #[Scope]

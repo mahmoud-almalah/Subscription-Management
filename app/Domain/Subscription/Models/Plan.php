@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Subscription\Models;
 
+use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Tenant\Models\Tenant;
 use Database\Factories\PlanFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -31,7 +32,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['tenant_id', 'name', 'description', 'price', 'currency', 'billing_cycle', 'is_active', 'features'])]
 final class Plan extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasTenant, HasUlids;
 
     /** @return array<string, string> */
     protected function casts(): array

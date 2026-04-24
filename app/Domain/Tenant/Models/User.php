@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property string $id
@@ -28,7 +29,7 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password'])]
 final class User extends Authenticatable
 {
-    use HasFactory, HasUlids, Notifiable;
+    use HasApiTokens, HasFactory, HasUlids, Notifiable;
 
     /** @return array<string, string> */
     protected function casts(): array
@@ -44,13 +45,13 @@ final class User extends Authenticatable
         return $this->belongsTo(related: Tenant::class, foreignKey: 'tenant_id', ownerKey: 'id');
     }
 
-    protected static function newFactory(): UserFactory
-    {
-        return UserFactory::new();
-    }
-
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
     }
 }

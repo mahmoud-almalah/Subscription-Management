@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Billing\Models;
 
 use App\Domain\Billing\Enums\InvoiceStatusEnum;
+use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Subscription\Models\Subscription;
 use App\Domain\Tenant\Models\Customer;
 use App\Domain\Tenant\Models\Tenant;
@@ -47,7 +48,7 @@ use Illuminate\Support\Carbon;
 ])]
 final class Invoice extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasTenant, HasUlids;
 
     /* @return array<string, string> */
     protected function casts(): array

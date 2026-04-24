@@ -6,6 +6,7 @@ namespace App\Domain\Tenant\Models;
 
 use App\Domain\Billing\Models\Invoice;
 use App\Domain\Billing\Models\Payment;
+use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Subscription\Enums\SubscriptionStatusEnum;
 use App\Domain\Subscription\Models\Subscription;
 use App\Domain\Tenant\Casts\LocationCast;
@@ -42,7 +43,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['tenant_id', 'name', 'email', 'phone', 'address', 'status', 'metadata'])]
 final class Customer extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasTenant, HasUlids;
 
     /** @return array<string, string> */
     protected function casts(): array
@@ -70,7 +71,7 @@ final class Customer extends Model
     public function getActiveSubscription(): ?Subscription
     {
         return $this->subscriptions()
-            ->active('status', SubscriptionStatusEnum::ACTIVE)
+            ->where('status', SubscriptionStatusEnum::ACTIVE)
             ->first();
     }
 

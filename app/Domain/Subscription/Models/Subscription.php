@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Subscription\Models;
 
 use App\Domain\Billing\Models\Invoice;
+use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Subscription\Enums\SubscriptionStatusEnum;
 use App\Domain\Tenant\Models\Customer;
 use App\Domain\Tenant\Models\Tenant;
@@ -42,7 +43,7 @@ use Illuminate\Support\Carbon;
 ])]
 final class Subscription extends Model
 {
-    use HasFactory, HasUlids;
+    use HasFactory, HasTenant, HasUlids;
 
     /* @return array<string, string> */
     protected function casts(): array
@@ -63,7 +64,7 @@ final class Subscription extends Model
             && ($this->ends_at === null || $this->ends_at->isFuture());
     }
 
-    public function cancel(string $reason = null): void
+    public function cancel(?string $reason = null): void
     {
         $this->update([
             'status' => SubscriptionStatusEnum::CANCELLED,

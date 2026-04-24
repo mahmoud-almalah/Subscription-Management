@@ -101,8 +101,7 @@ final class Tenant extends Model
     }
 
     /**
-     * @param Builder<Tenant> $query
-     *
+     * @param  Builder<Tenant>  $query
      * @return Builder<Tenant>
      */
     #[Scope]
