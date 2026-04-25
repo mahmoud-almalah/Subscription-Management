@@ -8,7 +8,7 @@ A multi-tenant SaaS backend for managing subscriptions, billing, and financial r
 
 ## Live Demo
 
-**Base URL:** `https://your-deployment.railway.app/api`
+**Base URL:** `https://subscription-management-production.up.railway.app/`
 
 > Seed data is available — use the credentials below to test immediately.
 
@@ -41,7 +41,7 @@ These are two separate tenants — their data is fully isolated from each other.
 **Requirements:** PHP 8.3+, Composer, PostgreSQL
 
 ```bash
-git clone https://github.com/your-username/subscription-management.git
+git clone https://github.com/mahmoud-almalah/Subscription-Management.git
 cd subscription-management
 
 # Install dependencies
