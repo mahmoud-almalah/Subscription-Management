@@ -12,11 +12,12 @@ A multi-tenant SaaS backend for managing subscriptions, billing, and financial r
 
 > Seed data is available — use the credentials below to test immediately.
 
-| Role  | Email                   | Password    |
-|-------|-------------------------|-------------|
-| Admin | acmecorp@gmail.com      | password123 |
-| Admin | techstart@gmail.com     | password123 |
-| Admin | saudi-digital@gmail.com | password123 |
+| Email                | Password    | Type  | Status    |
+|----------------------|-------------|-------|-----------|
+| acme-corp@gmail.com  | password123 | Admin | Active    |
+| bob@gmail.com        | password123 | User  | Active    |
+| globex-inc@gmail.com | password123 | Admin | Active    |
+| initech@gmail.com    | password123 | Admin | Suspended |
 
 These are two separate tenants — their data is fully isolated from each other.
 
