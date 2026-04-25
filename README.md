@@ -1,6 +1,6 @@
 # Subscription Management System
 
-A multi-tenant SaaS backend for managing subscriptions, billing, and financial reporting — built with Laravel 12, PostgreSQL, and a proper double-entry accounting engine.
+A multi-tenant SaaS backend for managing subscriptions, billing, and financial reporting — built with Laravel 13, PostgreSQL, and a proper double-entry accounting engine.
 
 > Built as a technical assessment. Designed with ERP-grade financial principles in mind.
 
@@ -27,7 +27,7 @@ These are two separate tenants — their data is fully isolated from each other.
 
 | Layer        | Choice                          |
 |--------------|---------------------------------|
-| Framework    | Laravel 12 (PHP 8.3)            |
+| Framework    | Laravel 13 (PHP 8.3)            |
 | Database     | PostgreSQL                      |
 | Auth         | Laravel Sanctum (API tokens)    |
 | ORM          | Eloquent with Global Scopes     |
@@ -59,6 +59,7 @@ php artisan key:generate
 # Run migrations and seed demo data
 php artisan migrate
 php artisan db:seed
+php artisan scribe:gen
 
 # Start the server
 php artisan serve
