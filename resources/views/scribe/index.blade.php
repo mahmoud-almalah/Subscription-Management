@@ -202,7 +202,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: April 24, 2026</li>
+        <li>Last updated: April 25, 2026</li>
     </ul>
 </div>
 
@@ -1487,14 +1487,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/customers/architecto" \
+    --get "http://127.0.0.1:8000/api/customers/01kq0a37ky64za3gtr6qszzjdc" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/customers/architecto"
+    "http://127.0.0.1:8000/api/customers/01kq0a37ky64za3gtr6qszzjdc"
 );
 
 const headers = {
@@ -1609,10 +1609,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-customers--id-"
-               value="architecto"
+               value="01kq0a37ky64za3gtr6qszzjdc"
                data-component="url">
     <br>
-<p>The ID of the customer. Example: <code>architecto</code></p>
+<p>The ID of the customer. Example: <code>01kq0a37ky64za3gtr6qszzjdc</code></p>
             </div>
                     </form>
 
@@ -1630,7 +1630,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/customers/architecto" \
+    "http://127.0.0.1:8000/api/customers/01kq0a37ky64za3gtr6qszzjdc" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1657,7 +1657,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/customers/architecto"
+    "http://127.0.0.1:8000/api/customers/01kq0a37ky64za3gtr6qszzjdc"
 );
 
 const headers = {
@@ -1778,10 +1778,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-customers--id-"
-               value="architecto"
+               value="01kq0a37ky64za3gtr6qszzjdc"
                data-component="url">
     <br>
-<p>The ID of the customer. Example: <code>architecto</code></p>
+<p>The ID of the customer. Example: <code>01kq0a37ky64za3gtr6qszzjdc</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1958,14 +1958,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/customers/architecto" \
+    "http://127.0.0.1:8000/api/customers/01kq0a37ky64za3gtr6qszzjdc" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/customers/architecto"
+    "http://127.0.0.1:8000/api/customers/01kq0a37ky64za3gtr6qszzjdc"
 );
 
 const headers = {
@@ -2062,10 +2062,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-customers--id-"
-               value="architecto"
+               value="01kq0a37ky64za3gtr6qszzjdc"
                data-component="url">
     <br>
-<p>The ID of the customer. Example: <code>architecto</code></p>
+<p>The ID of the customer. Example: <code>01kq0a37ky64za3gtr6qszzjdc</code></p>
             </div>
                     </form>
 
@@ -2651,10 +2651,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"payment_methods\": [
         \"architecto\"
     ],
-    \"date_from\": \"2026-04-24\",
-    \"date_to\": \"2052-05-17\",
-    \"order_by\": \"payment_date\",
-    \"order_direction\": \"asc\"
+    \"date_from\": \"2026-04-25\",
+    \"date_to\": \"2052-05-18\",
+    \"order_by\": \"created_at\",
+    \"order_direction\": \"desc\"
 }"
 </code></pre></div>
 
@@ -2676,10 +2676,10 @@ let body = {
     "payment_methods": [
         "architecto"
     ],
-    "date_from": "2026-04-24",
-    "date_to": "2052-05-17",
-    "order_by": "payment_date",
-    "order_direction": "asc"
+    "date_from": "2026-04-25",
+    "date_to": "2052-05-18",
+    "order_by": "created_at",
+    "order_direction": "desc"
 };
 
 fetch(url, {
@@ -2865,10 +2865,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="date_from"                data-endpoint="GETapi-payments"
-               value="2026-04-24"
+               value="2026-04-25"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a valid date in the format <code>Y-m-d</code>. Example: <code>2026-04-24</code></p>
+<p>Must be a valid date. Must be a valid date in the format <code>Y-m-d</code>. Example: <code>2026-04-25</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>date_to</code></b>&nbsp;&nbsp;
@@ -2877,10 +2877,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="date_to"                data-endpoint="GETapi-payments"
-               value="2052-05-17"
+               value="2052-05-18"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a valid date in the format <code>Y-m-d</code>. Must be a date after or equal to <code>date_from</code>. Example: <code>2052-05-17</code></p>
+<p>Must be a valid date. Must be a valid date in the format <code>Y-m-d</code>. Must be a date after or equal to <code>date_from</code>. Example: <code>2052-05-18</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>order_by</code></b>&nbsp;&nbsp;
@@ -2889,10 +2889,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="order_by"                data-endpoint="GETapi-payments"
-               value="payment_date"
+               value="created_at"
                data-component="body">
     <br>
-<p>Example: <code>payment_date</code></p>
+<p>Example: <code>created_at</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>amount</code></li> <li><code>payment_date</code></li> <li><code>created_at</code></li></ul>
         </div>
@@ -2903,10 +2903,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="order_direction"                data-endpoint="GETapi-payments"
-               value="asc"
+               value="desc"
                data-component="body">
     <br>
-<p>Example: <code>asc</code></p>
+<p>Example: <code>desc</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>asc</code></li> <li><code>desc</code></li></ul>
         </div>
@@ -3633,14 +3633,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/plans/architecto" \
+    --get "http://127.0.0.1:8000/api/plans/01kq0a37endz77c3kyzwqpwyds" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/plans/architecto"
+    "http://127.0.0.1:8000/api/plans/01kq0a37endz77c3kyzwqpwyds"
 );
 
 const headers = {
@@ -3755,10 +3755,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-plans--id-"
-               value="architecto"
+               value="01kq0a37endz77c3kyzwqpwyds"
                data-component="url">
     <br>
-<p>The ID of the plan. Example: <code>architecto</code></p>
+<p>The ID of the plan. Example: <code>01kq0a37endz77c3kyzwqpwyds</code></p>
             </div>
                     </form>
 
@@ -3776,7 +3776,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/plans/architecto" \
+    "http://127.0.0.1:8000/api/plans/01kq0a37endz77c3kyzwqpwyds" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3797,7 +3797,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/plans/architecto"
+    "http://127.0.0.1:8000/api/plans/01kq0a37endz77c3kyzwqpwyds"
 );
 
 const headers = {
@@ -3912,10 +3912,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-plans--id-"
-               value="architecto"
+               value="01kq0a37endz77c3kyzwqpwyds"
                data-component="url">
     <br>
-<p>The ID of the plan. Example: <code>architecto</code></p>
+<p>The ID of the plan. Example: <code>01kq0a37endz77c3kyzwqpwyds</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4020,14 +4020,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/plans/architecto" \
+    "http://127.0.0.1:8000/api/plans/01kq0a37endz77c3kyzwqpwyds" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/plans/architecto"
+    "http://127.0.0.1:8000/api/plans/01kq0a37endz77c3kyzwqpwyds"
 );
 
 const headers = {
@@ -4124,10 +4124,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-plans--id-"
-               value="architecto"
+               value="01kq0a37endz77c3kyzwqpwyds"
                data-component="url">
     <br>
-<p>The ID of the plan. Example: <code>architecto</code></p>
+<p>The ID of the plan. Example: <code>01kq0a37endz77c3kyzwqpwyds</code></p>
             </div>
                     </form>
 
@@ -4440,14 +4440,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/subscriptions/architecto" \
+    --get "http://127.0.0.1:8000/api/subscriptions/01kq0a387epwx336shk46x3jpy" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/subscriptions/architecto"
+    "http://127.0.0.1:8000/api/subscriptions/01kq0a387epwx336shk46x3jpy"
 );
 
 const headers = {
@@ -4562,10 +4562,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-subscriptions--id-"
-               value="architecto"
+               value="01kq0a387epwx336shk46x3jpy"
                data-component="url">
     <br>
-<p>The ID of the subscription. Example: <code>architecto</code></p>
+<p>The ID of the subscription. Example: <code>01kq0a387epwx336shk46x3jpy</code></p>
             </div>
                     </form>
 
@@ -4583,7 +4583,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/subscriptions/architecto" \
+    "http://127.0.0.1:8000/api/subscriptions/01kq0a387epwx336shk46x3jpy" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4595,7 +4595,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/subscriptions/architecto"
+    "http://127.0.0.1:8000/api/subscriptions/01kq0a387epwx336shk46x3jpy"
 );
 
 const headers = {
@@ -4701,10 +4701,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-subscriptions--id-"
-               value="architecto"
+               value="01kq0a387epwx336shk46x3jpy"
                data-component="url">
     <br>
-<p>The ID of the subscription. Example: <code>architecto</code></p>
+<p>The ID of the subscription. Example: <code>01kq0a387epwx336shk46x3jpy</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4747,7 +4747,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/subscriptions/architecto" \
+    "http://127.0.0.1:8000/api/subscriptions/01kq0a387epwx336shk46x3jpy" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4758,7 +4758,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/subscriptions/architecto"
+    "http://127.0.0.1:8000/api/subscriptions/01kq0a387epwx336shk46x3jpy"
 );
 
 const headers = {
@@ -4859,10 +4859,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-subscriptions--id-"
-               value="architecto"
+               value="01kq0a387epwx336shk46x3jpy"
                data-component="url">
     <br>
-<p>The ID of the subscription. Example: <code>architecto</code></p>
+<p>The ID of the subscription. Example: <code>01kq0a387epwx336shk46x3jpy</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">

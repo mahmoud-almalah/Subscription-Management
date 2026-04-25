@@ -26,10 +26,7 @@ final class CustomerResource extends JsonResource
                 'name' => $this->resource->status->getLabel(),
             ],
             'metadata' => $this->resource->metadata?->toArray(),
-            'subscriptions' => $this->whenLoaded(
-                relationship: 'subscriptions',
-                value: SubscriptionResource::collection($this->resource->subscriptions)
-            ),
+            'subscriptions' => SubscriptionResource::collection($this->whenLoaded('subscriptions')),
         ];
     }
 }

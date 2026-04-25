@@ -38,7 +38,7 @@ final class PaymentService
                 'notes' => $notes,
             ] = $data;
 
-            $this->validatePaymentAmount($invoice, $amount);
+            $this->validatePaymentAmount($invoice, (float) $amount);
 
             $payment = Payment::create([
                 'tenant_id' => $invoice->tenant_id,

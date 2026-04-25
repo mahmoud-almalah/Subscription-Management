@@ -6,104 +6,71 @@ namespace Database\Seeders;
 
 use App\Domain\Subscription\Models\Plan;
 use App\Domain\Tenant\Models\Tenant;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 final class PlanSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     public function run(): void
     {
-        $acme = Tenant::query()->where('slug', 'acme-corp')->first();
-        $techstart = Tenant::query()->where('slug', 'techstart')->first();
-        $saudiDigital = Tenant::query()->where('slug', 'saudi-digital')->first();
-
-        if (! $acme || ! $techstart || ! $saudiDigital) {
-            return;
-        }
+        $tenants = Tenant::withoutGlobalScopes()->get();
 
         $plans = [
             [
-                'tenant_id' => $acme->id,
-                'name' => 'Basic',
-                'description' => 'Basic plan for small businesses',
-                'price' => 9.99,
-                'currency' => 'USD',
-                'billing_cycle' => 'monthly',
-                'is_active' => true,
-                'features' => ['5 Users', '100 Invoices', 'Email Support'],
-            ],
-            [
-                'tenant_id' => $acme->id,
-                'name' => 'Pro',
-                'description' => 'Professional plan with advanced features',
-                'price' => 29.99,
-                'currency' => 'USD',
-                'billing_cycle' => 'monthly',
-                'is_active' => true,
-                'features' => ['25 Users', 'Unlimited Invoices', 'Priority Support', 'API Access'],
-            ],
-            [
-                'tenant_id' => $acme->id,
-                'name' => 'Enterprise',
-                'description' => 'Enterprise plan for large organizations',
-                'price' => 299.99,
-                'currency' => 'USD',
-                'billing_cycle' => 'monthly',
-                'is_active' => true,
-                'features' => ['Unlimited Users', 'Unlimited Invoices', '24/7 Support', 'API Access', 'Custom Integrations'],
-            ],
-            [
-                'tenant_id' => $techstart->id,
                 'name' => 'Starter',
-                'description' => 'Starter plan for new businesses',
-                'price' => 19.99,
-                'currency' => 'EUR',
+                'description' => 'Perfect for small teams just getting started.',
+                'price' => 29.00,
+                'currency' => 'USD',
                 'billing_cycle' => 'monthly',
                 'is_active' => true,
-                'features' => ['10 Users', '500 Invoices', 'Email Support'],
+                'features' => ['Up to 5 users', '10GB storage', 'Email support'],
             ],
             [
-                'tenant_id' => $techstart->id,
-                'name' => 'Business',
-                'description' => 'Business plan for growing companies',
-                'price' => 59.99,
-                'currency' => 'EUR',
+                'name' => 'Professional',
+                'description' => 'For growing businesses with advanced needs.',
+                'price' => 99.00,
+                'currency' => 'USD',
                 'billing_cycle' => 'monthly',
                 'is_active' => true,
-                'features' => ['50 Users', 'Unlimited Invoices', 'Priority Support', 'API Access'],
+                'features' => ['Up to 25 users', '100GB storage', 'Priority support', 'API access'],
             ],
             [
-                'tenant_id' => $saudiDigital->id,
-                'name' => 'أساسي',
-                'description' => 'الخطة الأساسية',
-                'price' => 37.50,
-                'currency' => 'SAR',
+                'name' => 'Enterprise',
+                'description' => 'Unlimited scale for large organizations.',
+                'price' => 299.00,
+                'currency' => 'USD',
                 'billing_cycle' => 'monthly',
                 'is_active' => true,
-                'features' => ['5 مستخدمين', '100 فاتورة', 'دعم عبر البريد'],
+                'features' => ['Unlimited users', '1TB storage', 'Dedicated support', 'API access', 'Custom integrations'],
             ],
             [
-                'tenant_id' => $saudiDigital->id,
-                'name' => 'متميز',
-                'description' => 'الخطة المميزة',
-                'price' => 112.50,
-                'currency' => 'SAR',
-                'billing_cycle' => 'monthly',
+                'name' => 'Starter Annual',
+                'description' => 'Starter plan billed annually — 2 months free.',
+                'price' => 290.00,
+                'currency' => 'USD',
+                'billing_cycle' => 'yearly',
                 'is_active' => true,
-                'features' => ['25 مستخدم', 'فاتورات غير محدودة', 'دعم أولوية', 'وصول API'],
+                'features' => ['Up to 5 users', '10GB storage', 'Email support'],
+            ],
+            [
+                'name' => 'Legacy Basic',
+                'description' => 'Deprecated plan — no longer available for new signups.',
+                'price' => 19.00,
+                'currency' => 'USD',
+                'billing_cycle' => 'monthly',
+                'is_active' => false,
+                'features' => ['Up to 2 users', '5GB storage'],
             ],
         ];
 
-        foreach ($plans as $planData) {
-            Plan::query()->updateOrCreate(
-                [
-                    'tenant_id' => $planData['tenant_id'],
-                    'name' => $planData['name'],
-                ],
-                $planData
-            );
+        foreach ($tenants as $tenant) {
+            foreach ($plans as $plan) {
+                Plan::withoutGlobalScopes()->create([
+                    ...$plan,
+                    'tenant_id' => $tenant->id,
+                ]);
+            }
         }
+
+        $this->command->info('  Plans seeded: 5 plans × 3 tenants = 15 plans');
     }
 }

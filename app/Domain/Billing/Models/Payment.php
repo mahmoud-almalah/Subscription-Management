@@ -47,6 +47,7 @@ final class Payment extends Model
         return [
             'payment_date' => 'date',
             'payment_method' => PaymentMethodEnum::class,
+            'amount' => 'float',
         ];
     }
 

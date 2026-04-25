@@ -38,7 +38,7 @@ Route::middleware([
     Route::apiResource('payments', PaymentController::class)
         ->only(['index', 'show', 'store']);
 
-    Route::get('invoices/generate-monthly', [InvoiceController::class, 'generateMonthlyInvoices'])
+    Route::get('invoices/generate-monthly/{subscription}', [InvoiceController::class, 'generateMonthlyInvoices'])
         ->name('invoices.generate-monthly');
 
     Route::group([

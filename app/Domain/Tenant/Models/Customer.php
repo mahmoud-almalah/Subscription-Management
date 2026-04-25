@@ -92,7 +92,7 @@ final class Customer extends Model
 
     public function getTotalRevenue(): float
     {
-        return $this->payments()
+        return (float) $this->payments()
             ->where('amount', '>', 0)
             ->sum('amount');
     }

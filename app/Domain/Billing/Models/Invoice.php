@@ -57,9 +57,10 @@ final class Invoice extends Model
             'period_start' => 'date',
             'period_end' => 'date',
             'due_date' => 'date',
-            'paid_at' => 'timestamp',
-            'revenue_recognized_at' => 'timestamp',
+            'paid_at' => 'datetime',
+            'revenue_recognized_at' => 'datetime',
             'status' => InvoiceStatusEnum::class,
+            'amount' => 'float',
         ];
     }
 

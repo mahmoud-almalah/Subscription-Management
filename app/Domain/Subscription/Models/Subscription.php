@@ -9,6 +9,7 @@ use App\Domain\Shared\Concerns\HasTenant;
 use App\Domain\Subscription\Enums\SubscriptionStatusEnum;
 use App\Domain\Tenant\Models\Customer;
 use App\Domain\Tenant\Models\Tenant;
+use Carbon\CarbonImmutable;
 use Database\Factories\SubscriptionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
@@ -18,7 +19,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
@@ -26,10 +26,10 @@ use Illuminate\Support\Carbon;
  * @property string $customer_id
  * @property string $plan_id
  * @property SubscriptionStatusEnum $status
- * @property Carbon $started_at
- * @property Carbon|null $ends_at
- * @property Carbon|null $next_billing_date
- * @property Carbon|null $cancelled_at
+ * @property CarbonImmutable $started_at
+ * @property CarbonImmutable|null $ends_at
+ * @property CarbonImmutable|null $next_billing_date
+ * @property int|null $cancelled_at
  * @property string|null $cancellation_reason
  * @property-read Tenant $tenant
  * @property-read Customer $customer
@@ -73,7 +73,7 @@ final class Subscription extends Model
         ]);
     }
 
-    public function getNextBillingDate(): ?Carbon
+    public function getNextBillingDate(): ?CarbonImmutable
     {
         if ($this->status->isCancelled() || $this->next_billing_date === null) {
             return null;

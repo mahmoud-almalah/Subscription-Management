@@ -28,10 +28,7 @@ final class JournalEntryResource extends JsonResource
                 'id' => $this->resource->reference_id,
                 'type' => $this->resource->reference_type,
             ],
-            'lines' => $this->whenLoaded(
-                relationship: 'lines',
-                value: JournalLineResource::collection($this->resource->lines),
-            ),
+            'lines' => JournalLineResource::collection($this->whenLoaded('lines')),
             'created_at' => $this->resource->created_at->toDateTimeString(),
         ];
     }

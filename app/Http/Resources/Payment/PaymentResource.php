@@ -27,14 +27,8 @@ final class PaymentResource extends JsonResource
             'payment_date' => $this->resource->payment_date->toDateString(),
             'reference_number' => $this->resource->reference_number,
             'notes' => $this->resource->notes,
-            'invoice' => $this->whenLoaded(
-                relationship: 'invoice',
-                value: InvoiceResource::make($this->resource->invoice),
-            ),
-            'customer' => $this->whenLoaded(
-                relationship: 'customer',
-                value: CustomerResource::make($this->resource->customer),
-            ),
+            'invoice' => InvoiceResource::make($this->whenLoaded('invoice')),
+            'customer' => CustomerResource::make($this->whenLoaded('customer')),
             'created_at' => $this->resource->created_at->toDateTimeString(),
         ];
     }

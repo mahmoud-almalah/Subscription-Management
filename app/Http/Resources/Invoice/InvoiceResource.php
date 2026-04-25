@@ -25,18 +25,9 @@ final class InvoiceResource extends JsonResource
                 'id' => $this->resource->status->value,
                 'name' => $this->resource->status->getLabel(),
             ],
-            'customer' => $this->whenLoaded(
-                relationship: 'customer',
-                value: CustomerResource::make($this->resource->customer)
-            ),
-            'subscription' => $this->whenLoaded(
-                relationship: 'subscription',
-                value: SubscriptionResource::make($this->resource->subscription)
-            ),
-            'payments' => $this->whenLoaded(
-                relationship: 'payments',
-                value: PaymentResource::collection($this->resource->payments)
-            ),
+            'customer' => CustomerResource::make($this->whenLoaded('customer')),
+            'subscription' => SubscriptionResource::make($this->whenLoaded('subscription')),
+            'payments' => PaymentResource::collection($this->whenLoaded('payments')),
             'is_paid' => $this->resource->isPaid(),
             'is_overdue' => $this->resource->isOverdue(),
             'period_start' => $this->resource->period_start->toDateString(),

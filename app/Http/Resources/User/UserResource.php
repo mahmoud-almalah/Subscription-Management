@@ -21,7 +21,7 @@ final class UserResource extends JsonResource
             'name' => $this->resource->name,
             'email' => $this->resource->email,
             'role' => $this->resource->role,
-            'tenant' => $this->whenLoaded('tenant', TenantResource::make($this->resource->tenant)),
+            'tenant' => TenantResource::make($this->whenLoaded('tenant')),
             'token' => $this->whenNotNull($this->token),
         ];
     }

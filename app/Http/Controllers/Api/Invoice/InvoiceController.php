@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api\Invoice;
 use App\Domain\Billing\Enums\InvoiceStatusEnum;
 use App\Domain\Billing\Models\Invoice;
 use App\Domain\Billing\Services\InvoiceService;
+use App\Domain\Subscription\Models\Subscription;
 use App\Http\Requests\Invoice\FilterInvoiceRequest;
 use App\Http\Resources\Invoice\InvoiceResource;
 use App\Http\Responses\ApiResponse;
@@ -27,7 +28,7 @@ final class InvoiceController
     #[BodyParam(
         name: 'subscriptions_ids',
         description: 'Filter invoices by an array of subscription IDs.',
-        example: '["01F8MECHZX3TBDSZ7XRADM79XV", "01F8MECHZX3TBDSZ7XRADM79XW"]'
+        example: ['01F8MECHZX3TBDSZ7XRADM79XV', '01F8MECHZX3TBDSZ7XRADM79XW']
     )]
     #[BodyParam(
         name: 'amount_from',
@@ -47,7 +48,8 @@ final class InvoiceController
     #[BodyParam(
         name: 'statuses',
         description: 'Filter invoices by an array of statuses.',
-        example: '["paid", "pending"]'
+        example: ['paid', 'pending'],
+        enum: InvoiceStatusEnum::class
     )]
     #[BodyParam(
         name: 'period_start',
@@ -142,10 +144,10 @@ final class InvoiceController
         title: 'Generate Monthly Invoices',
         description: 'Generate monthly invoices for a given subscription.',
     )]
-    public function generateMonthlyInvoices(Invoice $invoice): Responsable
+    public function generateMonthlyInvoices(Subscription $subscription): Responsable
     {
         app(InvoiceService::class)
-            ->generate($invoice->subscription);
+            ->generate($subscription);
 
         return ApiResponse::success(message: 'Monthly invoices generated successfully.');
     }

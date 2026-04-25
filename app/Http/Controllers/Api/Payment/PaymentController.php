@@ -71,6 +71,11 @@ final class PaymentController
         description: 'Record a payment against a specific invoice.',
     )]
     #[BodyParam(
+        name: 'invoice_id',
+        description: 'ID of the invoice to which the payment is applied.',
+        example: 'inv_123456'
+    )]
+    #[BodyParam(
         name: 'amount',
         description: 'Payment amount.',
         example: '100.00'
@@ -100,8 +105,11 @@ final class PaymentController
         description: 'Optional notes.',
         example: 'Paid via wire transfer'
     )]
-    public function store(Invoice $invoice, StorePaymentRequest $request): Responsable
+    public function store(StorePaymentRequest $request): Responsable
     {
+        $invoice = Invoice::query()
+            ->findOrFail($request->string('invoice_id')->value());
+
         $payment = $this->paymentService->record($invoice, $request->validated());
 
         return ApiResponse::model(
